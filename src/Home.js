@@ -2,37 +2,58 @@ import {useState, useEffect} from 'react';
 import BlogList from './Bloglist';
 
 const Home = () =>{
-    const [blogs, setBlogs] = useState([
+    const [blogs, setBlogs] = useState(null);
+
+    
+    {/*const [blogs, setBlogs] = useState([
         {title: 'My new Website', body:'lorem ipsum...', author: 'mario', id: 1 },
         {title: 'Welcome party!', body:'lorem ipsum...', author: 'yoshi', id: 2 },
         {title: 'Web dev top tips', body:'lorem ipsum...', author: 'mario', id: 3 }
     ]);
+    */}
 
     //const [name, setName] = useState('mario');
 
-    const handleDelete = (id) => {
+    {/*const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
         setBlogs(newBlogs);
-    }
-
+    }*/
+}
     useEffect(()=>{
-        console.log('use effect Run');
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json();
+            })
+            .then(data=>{
+                console.log(data);
+                setBlogs(data);
+            })
+
+        //console.log('use effect Run');
         //console.log(blogs);
        // console.log(name);
     }, []);
+}
 
+    return(
+        <div className = "home"> 
+        </div>
+    )
+      
+    {/*
       return(
           <div className = "home">
-              <BlogList blogs={blogs} title="All Blogs !" handleDelete={handleDelete}/>
-              {/*<BlogList blogs={blogs.filter((blog)=> blog.author==='mario')} title="Mario's Blogs !"/>
+              {blogs && <BlogList blogs={blogs} title="All Blogs !" handleDelete={handleDelete}/>}
+              <BlogList blogs={blogs.filter((blog)=> blog.author==='mario')} title="Mario's Blogs !"/>
                 <button onClick = {()=>setName("Steve")}>Change Name</button>
-                <p>{name}</p>  */}
+                <p>{name}</p>  
           </div>
       );
-  }
+      */}
+  
 
 
-/* Change State
+{/* Change State
 const Home = () =>{
   //  let name = 'mario';
     const [name, setName] = useState('mario');
@@ -54,8 +75,8 @@ const Home = () =>{
     );
 }
 
-*/
-/* Cheking different Component uses
+*/}
+{/* Cheking different Component uses
 const Home = () =>{
     const handleClick = (e) =>{
         console.log("Hello, Ninjas", e);
@@ -74,6 +95,6 @@ const Home = () =>{
         </div>
     );
 }
-    */
+    */}
 
 export default Home;
