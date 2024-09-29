@@ -3,7 +3,7 @@ import BlogList from './Bloglist';
 
 const Home = () =>{
     const [blogs, setBlogs] = useState(null);
-
+    const [isPending, setIsPending] = useState(true);
     
     {/*const [blogs, setBlogs] = useState([
         {title: 'My new Website', body:'lorem ipsum...', author: 'mario', id: 1 },
@@ -20,23 +20,30 @@ const Home = () =>{
     }*/
 }
     useEffect(()=>{
-        fetch('http://localhost:8000/blogs')
+        setTimeout(()=>{
+            fetch('http://localhost:8000/blogs')
             .then(res => {
                 return res.json();
             })
             .then(data=>{
                 console.log(data);
                 setBlogs(data);
-            })
+                setIsPending(false);
+            });
 
         //console.log('use effect Run');
         //console.log(blogs);
        // console.log(name);
+    }, 1000);
     }, []);
+       
+        
 
 
     return(
-        <div className = "home"> 
+        <div className = "home">
+            {isPending && <div>Loading...</div>}
+            {blogs && <BlogList blogs={blogs} title="All Blogs !" />} 
         </div>
     )
 }    
@@ -50,9 +57,6 @@ const Home = () =>{
           </div>
       );
       */}
-  
-
-
 {/* Change State
 const Home = () =>{
   //  let name = 'mario';
