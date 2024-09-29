@@ -33,13 +33,13 @@ const Home = () =>{
         //console.log(blogs);
        // console.log(name);
     }, []);
-}
+
 
     return(
         <div className = "home"> 
         </div>
     )
-      
+}    
     {/*
       return(
           <div className = "home">
